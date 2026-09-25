@@ -154,32 +154,32 @@
   --color-yellow-800: #92400e;
   --color-yellow-900: #78350f;
 
-  /* custom warm colors */
-  --color-beige-50: #fefdfb;
-  --color-beige-100: #f9f6f0;
-  --color-beige-200: #f5e6d3;
-  --color-beige-300: #e8d5ba;
-  --color-beige-400: #d4ba94;
-  --color-beige-500: #c19f6f;
-  --color-rust-100: #fde8e6;
-  --color-rust-200: #fbc5bf;
-  --color-rust-300: #f59f97;
-  --color-rust-400: #e8685c;
-  --color-rust-500: #c1423f;
-  --color-rust-600: #a53633;
-  --color-rust-700: #8a2c29;
-  --color-rust-800: #6f2320;
-  --color-terracotta-500: #d4623a;
-  --color-terracotta-600: #b54e2c;
+  /* cool surface and accent aliases kept for block compatibility */
+  --color-beige-50: #f8fbff;
+  --color-beige-100: #eef6ff;
+  --color-beige-200: #dbeafe;
+  --color-beige-300: #bfdbfe;
+  --color-beige-400: #93c5fd;
+  --color-beige-500: #60a5fa;
+  --color-rust-100: #dbeafe;
+  --color-rust-200: #bfdbfe;
+  --color-rust-300: #93c5fd;
+  --color-rust-400: #60a5fa;
+  --color-rust-500: #2563eb;
+  --color-rust-600: #1d4ed8;
+  --color-rust-700: #1e40af;
+  --color-rust-800: #1e3a8a;
+  --color-terracotta-500: #0ea5e9;
+  --color-terracotta-600: #0284c7;
 
   /* named colors */
-  --color-light: #ffffff;
-  --color-dark: #1a1412;
-  --color-text: light-dark(#2a2420, #f5e6d3);
-  --color-link: light-dark(var(--color-rust-600), var(--color-rust-400));
+  --color-light: #fff;
+  --color-dark: #0b1220;
+  --color-text: light-dark(#102033, #e8f1ff);
+  --color-link: light-dark(var(--color-blue-700), var(--color-blue-300));
   --color-brand: var(--color-rust-500);
   --color-accent: light-dark(var(--color-terracotta-600), var(--color-terracotta-500));
-  --color-shaded: light-dark(var(--color-beige-100), #2a2420);
+  --color-shaded: light-dark(var(--color-beige-100), #111c2f);
 
   /* fonts */
   --font-family: montserrat, "Trebuchet MS", sans-serif;
@@ -225,7 +225,13 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: light-dark(var(--color-light), var(--color-dark));
+  background:
+    radial-gradient(
+      circle at 18% 0%,
+      light-dark(rgb(37 99 235 / 8%), rgb(14 165 233 / 12%)),
+      transparent 34rem
+    ),
+    light-dark(var(--color-light), var(--color-dark));
   color: var(--color-text);
   font-family: var(--font-family);
   font-size: var(--body-font-size-m);
@@ -253,7 +259,7 @@ header {
 
 main {
   flex: 1;
-  
+
   ul,
   ol {
     padding-inline-start: 24px;
@@ -281,22 +287,37 @@ a {
     font-weight: 600;
     text-decoration: none;
     border: 2px solid;
-    padding: 12px 24px;
+    padding: 12px 22px;
     box-sizing: border-box;
-    border-radius: 8px;
-    transition: all 0.2s ease-in-out;
+    border-radius: 999px;
+    transition:
+      transform 0.2s ease-in-out,
+      box-shadow 0.2s ease-in-out,
+      color 0.2s ease-in-out,
+      background-color 0.2s ease-in-out,
+      border-color 0.2s ease-in-out;
     text-align: center;
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px light-dark(rgb(37 99 235 / 18%), rgb(14 165 233 / 16%));
+    }
+
+    &:active {
+      transform: translateY(1px);
+      box-shadow: none;
+    }
+
+    &:focus-visible {
+      outline: 3px solid light-dark(rgb(37 99 235 / 28%), rgb(147 197 253 / 42%));
+      outline-offset: 3px;
     }
 
     &.btn-outline {
       background: transparent;
 
       &:hover {
-        background: rgba(0, 0, 0, 0.05);
+        background: light-dark(rgb(37 99 235 / 8%), rgb(147 197 253 / 12%));
       }
     }
   }
@@ -308,8 +329,8 @@ a {
 
     &:hover {
       color: #fff;
-      background: var(--color-terracotta-600);
-      border-color: var(--color-terracotta-600);
+      background: var(--color-blue-700);
+      border-color: var(--color-blue-700);
     }
 
     &.btn-outline {
@@ -329,7 +350,7 @@ a {
     border-color: var(--color-brand);
 
     &:hover {
-      color: var(--color-beige-50);
+      color: #fff;
       background-color: var(--color-rust-600);
       border-color: var(--color-rust-600);
     }
@@ -488,7 +509,7 @@ img {
   }
 
   &[data-spacing="xl"] {
-    padding: 0 0 calc(var(--spacing-xl) * 2) 0;
+    --top-bottom-spacing: calc(var(--spacing-xl) * 2);
   }
 
   &[data-spacing="xxl"] {
@@ -601,60 +622,42 @@ h3,
 h4,
 h5,
 h6 {
-  color: var(--color-brand);
-  font-weight: 600;
+  color: light-dark(var(--color-gray-900), var(--color-gray-100));
+  font-weight: 650;
   line-height: var(--heading-line-height);
   margin-top: 1em;
   margin-bottom: 0.75em;
 }
 
-h1 { 
+h1 {
   font-size: var(--heading-font-size-xxl);
   margin-top: 2.5em;
   margin-bottom: 1em;
 }
 
-h2 { 
+h2 {
   font-size: var(--heading-font-size-xl);
   margin-top: 2em;
   margin-bottom: 0.85em;
 }
 
-h2 a {
-  color: light-dark(var(--color-dark), var(--color-light));
-  text-decoration: none;
-  text-underline-offset: 0.18em;
-  text-decoration-thickness: 1px;
-
-  &:hover,
-  &:focus-visible {
-    color: var(--color-brand);
-    text-decoration: underline;
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 4px;
-  }
-}
-
-h3 { 
+h3 {
   font-size: var(--heading-font-size-l);
   margin-top: 1.5em;
   margin-bottom: 0.75em;
 }
 
-h4 { 
+h4 {
   font-size: var(--heading-font-size-m);
   margin-bottom: 0.65em;
 }
 
-h5 { 
+h5 {
   font-size: var(--heading-font-size-s);
   margin-bottom: 0.6em;
 }
 
-h6 { 
+h6 {
   font-size: var(--heading-font-size-xs);
   margin-bottom: 0.6em;
 }
@@ -724,6 +727,11 @@ code {
   transition: color 0.15s ease;
 }
 
+svg {
+  width: 20px;
+  height: 20px;
+}
+
 .code-block-copy svg {
   width: 18px;
   height: 18px;
@@ -743,11 +751,6 @@ textarea,
 select,
 button {
   font: inherit;
-}
-
-svg {
-  width: 20px;
-  height: 20px;
 }
 
 /* Mermaid diagrams (code blocks whose first line is "mermaid") */
@@ -885,6 +888,7 @@ body:has(main .hero.top) {
         margin: 0;
         font-size: 48px;
         line-height: 1.08;
+        color: light-dark(var(--color-gray-900), var(--color-gray-100));
       }
 
       p {
@@ -959,7 +963,7 @@ body.article-page main .section > .default-content:not(:has(.hero)) {
   p > picture > img {
     border: 1px solid var(--color-gray-200);
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
   }
 
   pre {
@@ -1071,7 +1075,7 @@ body.article-page main .section > .default-content:not(:has(.hero)) {
         }
 
         a {
-          color: light-dark(var(--color-rust-600), var(--color-rust-300));
+          color: light-dark(var(--color-blue-700), var(--color-blue-300));
           text-decoration: none;
 
           &:hover {

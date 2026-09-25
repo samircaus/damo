@@ -16,14 +16,12 @@ function getRendererCssUrl(surfaceName) {
 }
 
 /** Map surface name to renderer module path (dynamic import). */
-const RENDERERS = {
-  'offers-below-hero': () => import('./renderers/offers-below-hero.js'),
-};
+const RENDERERS = { 'offers-below-hero': () => import('./renderers/offers-below-hero.js') };
 
 /** Surface name is the first class after "offers" (and "block" if present). */
 function getSurfaceNameFromBlock(block) {
   return [...block.classList].find(
-    (cls) => cls !== 'offers' && cls !== 'block'
+    (cls) => cls !== 'offers' && cls !== 'block',
   ) || null;
 }
 
@@ -67,7 +65,8 @@ function mapDecisionItemsToOffers(surfaceDecision) {
 }
 
 /**
- * Main decorate. Loads surface-specific renderer, reserves height immediately, then listens for personalization.
+ * Main decorate. Loads surface-specific renderer, reserves height,
+ * then listens for personalization.
  */
 export default async function decorate(block) {
   const parent = block.parentElement;
@@ -103,7 +102,7 @@ export default async function decorate(block) {
   if (renderer.reserveHeight) {
     renderer.reserveHeight(block);
   }
-  block.classList.add('offers--ready');
+  block.classList.add('offers-ready');
 
   const base = 'web://edgepatterns.dev';
   const path = window.location.pathname;

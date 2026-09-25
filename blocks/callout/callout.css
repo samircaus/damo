@@ -4,6 +4,7 @@
   max-width: var(--grid-container-width);
   margin-left: auto;
   margin-right: auto;
+
   --callout-border-width: 3px;
   --callout-icon-size: 1.25rem;
   --callout-gap: 0.75rem;
@@ -19,7 +20,7 @@
   --callout-info-border: light-dark(#8250df, #a371f7);
 }
 
-.callout__inner {
+.callout-inner {
   display: flex;
   flex-direction: column;
   gap: var(--callout-gap);
@@ -31,67 +32,67 @@
 }
 
 /* Type variants (background + border) */
-.callout--note .callout__inner {
+.callout-note .callout-inner {
   background-color: var(--callout-note-bg);
   border-color: var(--callout-note-border);
 }
 
-.callout--tip .callout__inner {
+.callout-tip .callout-inner {
   background-color: var(--callout-tip-bg);
   border-color: var(--callout-tip-border);
 }
 
-.callout--warning .callout__inner {
+.callout-warning .callout-inner {
   background-color: var(--callout-warning-bg);
   border-color: var(--callout-warning-border);
 }
 
-.callout--info .callout__inner {
+.callout-info .callout-inner {
   background-color: var(--callout-info-bg);
   border-color: var(--callout-info-border);
 }
 
-.callout__header {
+.callout-header {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.callout__title {
+.callout-title {
   font-weight: 600;
   font-size: 1rem;
   line-height: 1.35;
   margin: 0;
 }
 
-.callout__body {
+.callout-body {
   font-size: 0.9375rem;
   line-height: 1.5;
 }
 
-.callout__body .callout__row:first-child {
-  margin-top: 0;
-}
-
-.callout__body .callout__row {
+.callout-body .callout-row {
   margin-top: 0.5em;
 }
 
-.callout__body .callout__row p:first-child {
-  margin-top: 0;
-}
-
-.callout__body .callout__row p:last-child {
-  margin-bottom: 0;
-}
-
-.callout__body p,
-.callout__body ul,
-.callout__body ol {
+.callout-body p,
+.callout-body ul,
+.callout-body ol {
   margin: 0.5em 0;
 }
 
-.callout__body ul,
-.callout__body ol {
+.callout-body ul,
+.callout-body ol {
   padding-left: 1.5em;
+}
+
+.callout-body .callout-row:first-child {
+  margin-top: 0;
+}
+
+.callout-body .callout-row p:first-child {
+  margin-top: 0;
+}
+
+.callout-body .callout-row p:last-child {
+  margin-bottom: 0;
 }

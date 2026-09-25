@@ -1,7 +1,13 @@
 footer {
   margin-top: var(--spacing-xl);
-  border-top: 1px solid light-dark(var(--color-gray-200), var(--color-gray-700));
-  background-color: light-dark(var(--color-shaded), var(--color-gray-900));
+  border-top: 1px solid light-dark(rgb(37 99 235 / 12%), rgb(147 197 253 / 12%));
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      light-dark(rgb(37 99 235 / 10%), rgb(14 165 233 / 12%)),
+      transparent 24rem
+    ),
+    light-dark(var(--color-shaded), var(--color-gray-900));
 
   a {
     display: inline-flex;

@@ -1,7 +1,7 @@
 {
-  "name": "da-elsie",
+  "name": "damo",
   "version": "2.0.0",
-  "description": "Customized version of DA EDS site with modern design system.",
+  "description": "Damo site built on AEM Edge Delivery Services with a modern blue and white design system.",
   "scripts": {
     "lint:js": "eslint .",
     "lint:css": "stylelint blocks/**/*.css styles/*.css",
@@ -16,14 +16,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/samircaus/da-elsie.git"
+    "url": "git+https://github.com/samircaus/damo.git"
   },
   "author": "samircaus",
   "license": "Apache License 2.0",
   "bugs": {
-    "url": "https://github.com/samircaus/da-elsie/issues"
+    "url": "https://github.com/samircaus/damo/issues"
   },
-  "homepage": "https://main--da-elsie--samircaus.aem.page/",
+  "homepage": "https://main--damo--samircaus.aem.page/",
   "devDependencies": {
     "@babel/core": "7.24.5",
     "@babel/eslint-parser": "7.24.5",

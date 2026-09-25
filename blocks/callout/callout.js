@@ -2,7 +2,7 @@
  * Callout block: highlights a message with optional type and title.
  *
  * Structure (from sheet/document):
- * - Row 0, Cell 0: type (note | tip | warning | info) – optional, defaults to "note"
+ * - Row 0, Cell 0: type (note | tip | warning | info) - optional, defaults to "note"
  * - Row 0, Cell 1: optional title
  * - Row 1+: body content (paragraphs, lists, etc.)
  *
@@ -47,23 +47,23 @@ export default function init(block) {
   }
 
   const wrapper = document.createElement('div');
-  wrapper.className = 'callout__inner';
+  wrapper.className = 'callout-inner';
 
   if (title) {
     const header = document.createElement('div');
-    header.className = 'callout__header';
+    header.className = 'callout-header';
     const titleEl = document.createElement('div');
-    titleEl.className = 'callout__title';
+    titleEl.className = 'callout-title';
     titleEl.textContent = title;
     header.appendChild(titleEl);
     wrapper.appendChild(header);
   }
 
   const body = document.createElement('div');
-  body.className = 'callout__body';
+  body.className = 'callout-body';
   for (const row of bodyRows) {
     const rowWrap = document.createElement('div');
-    rowWrap.className = 'callout__row';
+    rowWrap.className = 'callout-row';
     while (row.firstChild) rowWrap.appendChild(row.firstChild);
     body.appendChild(rowWrap);
   }
@@ -75,9 +75,9 @@ export default function init(block) {
     title = firstHeading.textContent.trim();
     if (title) {
       const header = document.createElement('div');
-      header.className = 'callout__header';
+      header.className = 'callout-header';
       const titleEl = document.createElement('div');
-      titleEl.className = 'callout__title';
+      titleEl.className = 'callout-title';
       titleEl.textContent = title;
       header.appendChild(titleEl);
       wrapper.insertBefore(header, body);
@@ -86,6 +86,6 @@ export default function init(block) {
   }
 
   block.innerHTML = '';
-  block.classList.add('callout', `callout--${type}`);
+  block.classList.add('callout', `callout-${type}`);
   block.appendChild(wrapper);
 }

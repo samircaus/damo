@@ -14,7 +14,7 @@
  * Block already has class "offers-below-hero" from authoring; CSS uses that for layout.
  * @param {HTMLElement} block
  */
-export function reserveHeight(block) {
+export function reserveHeight() {
   /* no-op: block already has .offers-below-hero for scoped styles */
 }
 
@@ -31,7 +31,7 @@ export function render(block, offers, config) {
   const slicedOffers = offers.slice(0, maxItems);
 
   const wrapper = document.createElement('div');
-  wrapper.className = 'offers-list offers-list--below-hero';
+  wrapper.className = 'offers-list offers-list-below-hero';
 
   if (title) {
     const heading = document.createElement('h2');
@@ -70,10 +70,10 @@ export function render(block, offers, config) {
     contentContainer.className = 'offers-card-content-container';
 
     if (offer.title) {
-      const title = document.createElement('p');
-      title.className = 'offers-card-title';
-      title.textContent = offer.title;
-      contentContainer.appendChild(title);
+      const titleEl = document.createElement('p');
+      titleEl.className = 'offers-card-title';
+      titleEl.textContent = offer.title;
+      contentContainer.appendChild(titleEl);
     }
 
     if (offer.description) {

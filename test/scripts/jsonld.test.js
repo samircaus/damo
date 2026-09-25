@@ -133,19 +133,19 @@ describe('JSON-LD utilities', () => {
   describe('buildWebSiteSchema', () => {
     it('builds website schema from metadata', () => {
       const schema = buildWebSiteSchema({
-        name: 'DA Elsie',
+        name: 'Damo',
         url: 'https://example.com',
         description: 'Personal site',
         logo: 'https://example.com/logo.png',
       });
 
       expect(schema['@type']).to.equal('WebSite');
-      expect(schema.name).to.equal('DA Elsie');
+      expect(schema.name).to.equal('Damo');
       expect(schema.publisher.logo).to.equal('https://example.com/logo.png');
     });
 
     it('returns null without required fields', () => {
-      expect(buildWebSiteSchema({ name: 'DA Elsie' })).to.be.null;
+      expect(buildWebSiteSchema({ name: 'Damo' })).to.be.null;
     });
 
     // WebSite has no dedicated Google rich result (it only backs the Sitelinks
@@ -153,7 +153,7 @@ describe('JSON-LD utilities', () => {
     // builder doesn't emit), so we only assert Schema.org-valid shape here.
     it('produces schema.org-valid required properties', () => {
       const schema = buildWebSiteSchema({
-        name: 'DA Elsie',
+        name: 'Damo',
         url: 'https://example.com',
       });
 

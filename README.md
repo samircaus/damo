@@ -1,18 +1,18 @@
-# DA Elsie - Personal Edition
+# Damo
 
-This is my personal fork and customization of the Author Kit project. Built with modern web technologies and a refreshed design system.
+Damo is a customized AEM Edge Delivery Services project with a clean, modern blue and white design system.
 
-**🌐 Live Site:** [https://main--da-elsie--samircaus.aem.page/](https://main--da-elsie--samircaus.aem.page/)
+**Live Site:** [https://main--damo--samircaus.aem.page/](https://main--damo--samircaus.aem.page/)
 
 ## About This Project
 
-This is a customized version of the Author Kit, featuring:
+This project features:
 
-- **🎨 Modern Design System**: Completely refreshed color palette with contemporary blues, purples, and enhanced grays
-- **✨ Enhanced UI Components**: Updated buttons, cards, hero sections, tables with modern styling
-- **🌗 Improved Light/Dark Mode**: Better contrast and color schemes for both modes
-- **💫 Smooth Animations**: Subtle transitions and hover effects throughout
-- **📐 Enhanced Spacing**: Refined spacing scale for better visual hierarchy
+- **Modern Design System**: A focused white, blue, and slate palette
+- **Enhanced UI Components**: Updated buttons, cards, hero sections, tables, header, and footer
+- **Improved Light/Dark Mode**: Better contrast and consistent color tokens in both modes
+- **Subtle Interaction Design**: Clear hover, focus, and active states without visual clutter
+- **Refined Spacing**: Cleaner section rhythm and stronger visual hierarchy
 - Built on AEM (Adobe Experience Manager) Edge Delivery Services
 
 ### Design Refresh Highlights
@@ -20,18 +20,18 @@ This is a customized version of the Author Kit, featuring:
 **Color Palette**:
 
 - Primary Brand: Modern blue (`#2563eb`)
-- Accent: Vibrant purple (`#9333ea`)
-- Enhanced grays with better contrast
-- Full color spectrum updated to Tailwind-inspired palette
+- Accent: Sky blue (`#0284c7`)
+- Neutral Base: White, cool slate, and soft blue-tinted surfaces
+- Full color spectrum tuned for accessible contrast
 
 **Component Updates**:
 
-- Buttons with rounded corners, hover animations, and better shadows
-- Cards with modern borders, enhanced shadows, and smooth lift effects
-- Hero sections with gradient overlays and improved typography
-- Tables with alternating row hover states and better readability
-- Header with subtle shadow and backdrop blur
-- Footer with improved contrast and hover states
+- Buttons with pill corners, clear focus states, and tactile feedback
+- Cards with clean borders, subtle tinted shadows, and consistent radius
+- Hero sections with blue surface gradients and sharper typography
+- Tables with readable spacing and calmer row states
+- Header with a white/blue glass surface and single-line desktop rhythm
+- Footer with improved contrast and simpler link styling
 
 ## Getting Started
 
@@ -150,19 +150,19 @@ light, dark (with improved contrast ratios)
 
 ### Visual Design Refresh
 
-- ✅ Modernized color palette with Tailwind-inspired colors
-- ✅ Enhanced button styles with rounded corners and hover effects
-- ✅ Updated card components with modern shadows and borders
-- ✅ Improved hero section with gradient overlays
-- ✅ Enhanced table styling with better readability
-- ✅ Updated header with shadow and backdrop blur
-- ✅ Improved footer contrast and styling
-- ✅ Enhanced spacing scale for better visual hierarchy
-- ✅ Added smooth transitions throughout the UI
-- ✅ Better font rendering with antialiasing
+- Modernized color palette with a focused blue and white system
+- Enhanced button styles with consistent pill radius and focus states
+- Updated card components with cleaner borders and tinted shadows
+- Improved hero section with blue-tinted surfaces and reduced clutter
+- Enhanced table styling with better readability
+- Updated header with a calmer backdrop and simplified navigation states
+- Improved footer contrast and styling
+- Enhanced spacing scale for better visual hierarchy
+- Added restrained transitions throughout the UI
+- Better font rendering with antialiasing
 
 ### Documentation
 
-- ✅ Updated README with personal site information
-- ✅ Added comprehensive design refresh highlights
-- ✅ Updated package.json with correct project details
+- Updated README with Damo project information
+- Added concise design refresh highlights
+- Updated package metadata with correct project details

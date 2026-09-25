@@ -1,7 +1,13 @@
 .hero {
   position: relative;
   color: var(--color-dark);
-  background-color: var(--color-beige-100);
+  background:
+    radial-gradient(
+      circle at 82% 16%,
+      light-dark(rgb(14 165 233 / 18%), rgb(14 165 233 / 16%)),
+      transparent 32rem
+    ),
+    linear-gradient(135deg, light-dark(#f8fbff, #0b1220) 0%, light-dark(#eef6ff, #111c2f) 100%);
   overflow: hidden;
 
   --min-height: 420px;
@@ -32,48 +38,34 @@
 
   &.light {
     color: var(--color-dark);
-    background-color: var(--color-beige-100);
+    background:
+      radial-gradient(circle at 82% 16%, rgb(14 165 233 / 18%), transparent 32rem),
+      linear-gradient(135deg, #f8fbff 0%, #eef6ff 100%);
   }
 
   &.dark {
     color: var(--color-light);
-    background-color: var(--color-dark);
-  }
-
-  body.dark-scheme & {
-    color: var(--color-light);
-    background-color: var(--color-dark);
-
-    .hero-background img {
-      opacity: 0.3;
-    }
-
-    .hero-foreground {
-      p {
-        color: var(--color-beige-200);
-      }
-
-      .hero-detail {
-        color: var(--color-rust-400);
-      }
-
-      .hero-heading {
-        color: var(--color-light);
-      }
-    }
+    background:
+      radial-gradient(circle at 82% 16%, rgb(14 165 233 / 16%), transparent 32rem),
+      var(--color-dark);
   }
 
   &::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(193, 66, 63, 0.08) 0%, rgba(212, 98, 58, 0.08) 100%);
+    background:
+      linear-gradient(
+        135deg,
+        rgb(37 99 235 / 8%) 0%,
+        rgb(14 165 233 / 10%) 100%
+      );
     pointer-events: none;
     z-index: 1;
   }
-  
+
   &.dark::before {
-    background: linear-gradient(135deg, rgba(193, 66, 63, 0.2) 0%, rgba(212, 98, 58, 0.2) 100%);
+    background: linear-gradient(135deg, rgb(37 99 235 / 18%) 0%, rgb(14 165 233 / 16%) 100%);
   }
 
   .hero-background {
@@ -109,14 +101,14 @@
     display: flex;
     align-items: center;
     z-index: 2;
-    padding: var(--spacing-xl) 0;
+    padding: min(var(--spacing-xl), 48px) 0;
 
     p {
       margin: 24px 0;
       font-size: var(--body-font-size-xl);
-      line-height: 1.8;
-      color: var(--color-dark);
-      font-weight: 600;
+      line-height: 1.55;
+      color: light-dark(var(--color-gray-700), var(--color-blue-100));
+      font-weight: 500;
 
       @media (width >= 768px) {
         font-size: var(--body-font-size-xxl);
@@ -133,19 +125,19 @@
       text-transform: uppercase;
       letter-spacing: 1.5px;
       font-weight: 600;
-      color: var(--color-rust-600);
+      color: var(--color-blue-700);
       opacity: 0.95;
     }
 
     .hero-heading {
       margin: 20px 0;
       font-size: var(--heading-font-size-xxl);
-      font-weight: 700;
-      line-height: 1.2;
-      color: var(--color-dark);
+      font-weight: 750;
+      line-height: 1.08;
+      color: light-dark(var(--color-gray-900), var(--color-gray-100));
 
       @media (width >= 768px) {
-        font-size: 48px;
+        font-size: clamp(44px, 6vw, 72px);
       }
     }
   }
@@ -157,14 +149,35 @@
     }
   }
 
-  &.dark {
+  &.dark .hero-foreground {
+    p {
+      color: var(--color-beige-200);
+    }
+
+    .hero-detail {
+      color: var(--color-blue-300);
+    }
+
+    .hero-heading {
+      color: var(--color-light);
+    }
+  }
+
+  body.dark-scheme & {
+    color: var(--color-light);
+    background-color: var(--color-dark);
+
+    .hero-background img {
+      opacity: 0.3;
+    }
+
     .hero-foreground {
       p {
         color: var(--color-beige-200);
       }
 
       .hero-detail {
-        color: var(--color-rust-400);
+        color: var(--color-blue-300);
       }
 
       .hero-heading {
