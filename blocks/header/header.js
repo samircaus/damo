@@ -1,0 +1,265 @@
+import { getConfig, getMetadata } from '../../scripts/ak.js';
+import { loadFragment } from '../fragment/fragment.js';
+import { setColorScheme } from '../../scripts/utils/color-scheme.js';
+
+const { locale } = getConfig();
+
+const HEADER_PATH = '/fragments/nav/header';
+const HEADER_ACTIONS = [
+  '/tools/widgets/scheme',
+  '/tools/widgets/language',
+  '/tools/widgets/toggle',
+];
+
+function closeAllMenus() {
+  const openMenus = document.body.querySelectorAll('header .is-open');
+  for (const openMenu of openMenus) {
+    openMenu.classList.remove('is-open');
+  }
+}
+
+function docClose(e) {
+  if (e.target.closest('header')) return;
+  closeAllMenus();
+}
+
+function toggleMenu(menu) {
+  const isOpen = menu.classList.contains('is-open');
+  closeAllMenus();
+  if (isOpen) {
+    document.removeEventListener('click', docClose);
+    return;
+  }
+
+  // Setup the global close event
+  document.addEventListener('click', docClose);
+  menu.classList.add('is-open');
+}
+
+function decorateLanguage(btn) {
+  const section = btn.closest('.section');
+  btn.addEventListener('click', async () => {
+    let menu = section.querySelector('.language.menu');
+    if (!menu) {
+      const content = document.createElement('div');
+      content.classList.add('block-content');
+      const fragment = await loadFragment(`${locale.prefix}${HEADER_PATH}/languages`);
+      menu = document.createElement('div');
+      menu.className = 'language menu';
+      menu.append(fragment);
+      content.append(menu);
+      section.append(content);
+    }
+    toggleMenu(section);
+  });
+}
+
+function decorateScheme(btn) {
+  btn.addEventListener('click', async () => {
+    const { body } = document;
+
+    let currPref = localStorage.getItem('color-scheme');
+    if (!currPref) {
+      currPref = matchMedia('(prefers-color-scheme: dark)')
+        .matches ? 'dark-scheme' : 'light-scheme';
+    }
+
+    const theme = currPref === 'dark-scheme'
+      ? { add: 'light-scheme', remove: 'dark-scheme' }
+      : { add: 'dark-scheme', remove: 'light-scheme' };
+
+    body.classList.remove(theme.remove);
+    body.classList.add(theme.add);
+    localStorage.setItem('color-scheme', theme.add);
+    // Re-calculatie section schemes
+    const sections = document.querySelectorAll('.section');
+    for (const section of sections) {
+      setColorScheme(section);
+    }
+    document.dispatchEvent(new CustomEvent('ak:scheme-change'));
+  });
+}
+
+function decorateNavToggle(btn) {
+  btn.addEventListener('click', () => {
+    const header = document.body.querySelector('header');
+    if (header) header.classList.toggle('is-mobile-open');
+  });
+}
+
+async function decorateAction(header, pattern) {
+  const link = header.querySelector(`[href*="${pattern}"]`);
+  if (!link) return;
+
+  const icon = link.querySelector('.icon');
+  const text = link.textContent;
+  const btn = document.createElement('button');
+  if (icon) btn.append(icon);
+  if (text) {
+    const textSpan = document.createElement('span');
+    textSpan.className = 'text';
+    textSpan.textContent = text;
+    btn.append(textSpan);
+  }
+  const wrapper = document.createElement('div');
+  const iconClass = icon && icon.classList[1] ? icon.classList[1].replace('icon-', '') : '';
+  wrapper.className = `action-wrapper ${iconClass}`;
+  wrapper.append(btn);
+  
+  link.parentElement.parentElement.replaceChild(wrapper, link.parentElement);
+
+  if (pattern === '/tools/widgets/language') decorateLanguage(btn);
+  if (pattern === '/tools/widgets/scheme') decorateScheme(btn);
+  if (pattern === '/tools/widgets/toggle') decorateNavToggle(btn);
+}
+
+function decorateMenu() {
+  // TODO: finish single menu support
+  return null;
+}
+
+function decorateMegaMenu(li) {
+  const menu = li.querySelector('.fragment-content') ?? li.querySelector(':scope > .section');
+  if (!menu) return null;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'mega-menu';
+  wrapper.append(menu);
+  li.append(wrapper);
+  return wrapper;
+}
+
+function decorateNavItem(li) {
+  li.classList.add('main-nav-item');
+  const link = li.querySelector(':scope > p > a');
+  if (link) {
+    link.classList.add('main-nav-link');
+    const linkUrl = new URL(link.href, window.location.href);
+    if (linkUrl.pathname.replace(/\/$/, '') === window.location.pathname.replace(/\/$/, '')) {
+      link.classList.add('is-active');
+      link.setAttribute('aria-current', 'page');
+    }
+  }
+  const menu = decorateMegaMenu(li) || decorateMenu(li);
+  if (!(menu || link)) return;
+  
+  // Show mega menu on hover if it exists (desktop only)
+  if (menu) {
+    li.addEventListener('mouseenter', () => {
+      // Only show mega menu on desktop (>= 900px)
+      if (window.innerWidth >= 900) {
+        closeAllMenus();
+        li.classList.add('is-open');
+      }
+    });
+    
+    li.addEventListener('mouseleave', () => {
+      if (window.innerWidth >= 900) {
+        li.classList.remove('is-open');
+      }
+    });
+  }
+  
+  // Close mobile menu when clicking a link
+  if (link) {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 900) {
+        const header = document.body.querySelector('header');
+        if (header) header.classList.remove('is-mobile-open');
+      }
+    });
+  }
+}
+
+function decorateBrandSection(section) {
+  section.classList.add('brand-section');
+  const brandLink = section.querySelector('a');
+  const [, text] = brandLink.childNodes;
+  const span = document.createElement('span');
+  span.className = 'brand-text';
+  span.append(text);
+  brandLink.append(span);
+
+  // Create mobile hamburger menu toggle button
+  const defaultContent = section.querySelector('.default-content');
+  const mobileToggle = document.createElement('div');
+  mobileToggle.className = 'action-wrapper hamburger';
+  
+  const btn = document.createElement('button');
+  btn.setAttribute('aria-label', 'Toggle mobile menu');
+  
+  const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  icon.classList.add('icon', 'icon-hamburger');
+  icon.setAttribute('viewBox', '0 0 256 256');
+  icon.setAttribute('aria-hidden', 'true');
+  [
+    [32, 64, 192, 16],
+    [32, 120, 192, 16],
+    [32, 176, 192, 16],
+  ].forEach(([x, y, width, height]) => {
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('x', x);
+    rect.setAttribute('y', y);
+    rect.setAttribute('width', width);
+    rect.setAttribute('height', height);
+    rect.setAttribute('rx', '8');
+    rect.setAttribute('fill', 'currentColor');
+    icon.appendChild(rect);
+  });
+  
+  btn.appendChild(icon);
+  mobileToggle.appendChild(btn);
+  defaultContent.appendChild(mobileToggle);
+  
+  // Add click handler
+  decorateNavToggle(btn);
+}
+
+function decorateNavSection(section) {
+  section.classList.add('main-nav-section');
+  const navContent = section.querySelector('.default-content');
+  const navList = section.querySelector('ul');
+  if (!navList) return;
+  navList.classList.add('main-nav-list');
+
+  const nav = document.createElement('nav');
+  nav.append(navList);
+  navContent.append(nav);
+
+  const mainNavItems = section.querySelectorAll('nav > ul > li');
+  for (const navItem of mainNavItems) {
+    decorateNavItem(navItem);
+  }
+}
+
+async function decorateActionSection(section) {
+  section.classList.add('actions-section');
+}
+
+async function decorateHeader(fragment) {
+  const sections = fragment.querySelectorAll(':scope > .section');
+  if (sections[0]) decorateBrandSection(sections[0]);
+  if (sections[1]) decorateNavSection(sections[1]);
+  if (sections[2]) decorateActionSection(sections[2]);
+
+  // Decorate action widgets (language, scheme, etc.)
+  for (const pattern of HEADER_ACTIONS) {
+    decorateAction(fragment, pattern);
+  }
+}
+
+/**
+ * loads and decorates the header
+ * @param {Element} el The header element
+ */
+export default async function init(el) {
+  const headerMeta = getMetadata('header');
+  const path = headerMeta || HEADER_PATH;
+  try {
+    const fragment = await loadFragment(`${locale.prefix}${path}`);
+    fragment.classList.add('header-content');
+    await decorateHeader(fragment);
+    el.append(fragment);
+  } catch (e) {
+    throw Error(e);
+  }
+}

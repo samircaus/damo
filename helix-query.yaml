@@ -1,0 +1,20 @@
+version: 1
+indices:
+  articles:
+    target: /article-index.json
+    include:
+      - /patterns/**
+      - /martech/**
+      - /personalization/**
+      - /architecture/**
+      - /labs/**
+    exclude:
+      - "**/fragments/**"
+      - "/de/**"
+      - "/footer"
+      - "**/drafts/**"
+      - "**/*.json"
+    properties:
+      title:
+        select: h1
+        value: textContent(el)
