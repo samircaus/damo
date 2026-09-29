@@ -54,12 +54,18 @@
     content: "";
     position: absolute;
     inset: 0;
+
+    --hero-grid-line: light-dark(rgb(37 99 235 / 6%), rgb(147 197 253 / 6%));
+
     background:
+      linear-gradient(var(--hero-grid-line) 1px, transparent 1px) 0 0 / 48px 48px,
+      linear-gradient(90deg, var(--hero-grid-line) 1px, transparent 1px) 0 0 / 48px 48px,
       linear-gradient(
         135deg,
         rgb(37 99 235 / 8%) 0%,
         rgb(14 165 233 / 10%) 100%
       );
+    mask-image: radial-gradient(ellipse at 50% 40%, #000 30%, transparent 80%);
     pointer-events: none;
     z-index: 1;
   }
@@ -134,10 +140,60 @@
       font-size: var(--heading-font-size-xxl);
       font-weight: 750;
       line-height: 1.08;
+      letter-spacing: -0.02em;
       color: light-dark(var(--color-gray-900), var(--color-gray-100));
+      text-wrap: balance;
 
       @media (width >= 768px) {
         font-size: clamp(44px, 6vw, 72px);
+      }
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 4px 8px;
+      margin: 0;
+      padding: 6px 16px;
+      border: 1px solid light-dark(rgb(37 99 235 / 18%), rgb(147 197 253 / 22%));
+      border-radius: 999px;
+      background-color: light-dark(rgb(255 255 255 / 70%), rgb(17 28 47 / 60%));
+      backdrop-filter: blur(8px);
+      font-size: var(--body-font-size-xs);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      color: light-dark(var(--color-gray-700), var(--color-gray-300));
+
+      strong {
+        letter-spacing: 0.12em;
+        color: var(--color-brand);
+      }
+    }
+
+    p:not(.hero-eyebrow) {
+      text-wrap: pretty;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 36px;
+    }
+
+    .btn-secondary {
+      color: light-dark(var(--color-gray-900), var(--color-gray-100));
+      background-color: light-dark(rgb(255 255 255 / 72%), rgb(17 28 47 / 60%));
+      border-color: light-dark(rgb(37 99 235 / 22%), rgb(147 197 253 / 28%));
+      backdrop-filter: blur(8px);
+
+      &:hover {
+        color: var(--color-brand);
+        background-color: light-dark(var(--color-light), rgb(17 28 47 / 90%));
+        border-color: var(--color-brand);
       }
     }
   }
@@ -146,6 +202,17 @@
     .hero-foreground {
       justify-content: center;
       text-align: center;
+
+      > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 900px;
+      }
+
+      .btn-group {
+        justify-content: center;
+      }
     }
   }
 

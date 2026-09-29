@@ -105,7 +105,7 @@ async function decorateAction(header, pattern) {
   const iconClass = icon && icon.classList[1] ? icon.classList[1].replace('icon-', '') : '';
   wrapper.className = `action-wrapper ${iconClass}`;
   wrapper.append(btn);
-  
+
   link.parentElement.parentElement.replaceChild(wrapper, link.parentElement);
 
   if (pattern === '/tools/widgets/language') decorateLanguage(btn);
@@ -130,7 +130,7 @@ function decorateMegaMenu(li) {
 
 function decorateNavItem(li) {
   li.classList.add('main-nav-item');
-  const link = li.querySelector(':scope > p > a');
+  const link = li.querySelector(':scope > p > a, :scope > a');
   if (link) {
     link.classList.add('main-nav-link');
     const linkUrl = new URL(link.href, window.location.href);
@@ -141,7 +141,7 @@ function decorateNavItem(li) {
   }
   const menu = decorateMegaMenu(li) || decorateMenu(li);
   if (!(menu || link)) return;
-  
+
   // Show mega menu on hover if it exists (desktop only)
   if (menu) {
     li.addEventListener('mouseenter', () => {
@@ -151,14 +151,14 @@ function decorateNavItem(li) {
         li.classList.add('is-open');
       }
     });
-    
+
     li.addEventListener('mouseleave', () => {
       if (window.innerWidth >= 900) {
         li.classList.remove('is-open');
       }
     });
   }
-  
+
   // Close mobile menu when clicking a link
   if (link) {
     link.addEventListener('click', () => {
@@ -174,19 +174,24 @@ function decorateBrandSection(section) {
   section.classList.add('brand-section');
   const brandLink = section.querySelector('a');
   const [, text] = brandLink.childNodes;
-  const span = document.createElement('span');
-  span.className = 'brand-text';
-  span.append(text);
-  brandLink.append(span);
+  // Only split out a text label when the brand has a logo (icon/image) before it.
+  if (text) {
+    const span = document.createElement('span');
+    span.className = 'brand-text';
+    span.append(text);
+    brandLink.append(span);
+  } else {
+    brandLink.classList.add('brand-wordmark');
+  }
 
   // Create mobile hamburger menu toggle button
   const defaultContent = section.querySelector('.default-content');
   const mobileToggle = document.createElement('div');
   mobileToggle.className = 'action-wrapper hamburger';
-  
+
   const btn = document.createElement('button');
   btn.setAttribute('aria-label', 'Toggle mobile menu');
-  
+
   const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   icon.classList.add('icon', 'icon-hamburger');
   icon.setAttribute('viewBox', '0 0 256 256');
@@ -205,11 +210,11 @@ function decorateBrandSection(section) {
     rect.setAttribute('fill', 'currentColor');
     icon.appendChild(rect);
   });
-  
+
   btn.appendChild(icon);
   mobileToggle.appendChild(btn);
   defaultContent.appendChild(mobileToggle);
-  
+
   // Add click handler
   decorateNavToggle(btn);
 }
@@ -229,6 +234,10 @@ function decorateNavSection(section) {
   for (const navItem of mainNavItems) {
     decorateNavItem(navItem);
   }
+
+  const ctaLink = [...navList.querySelectorAll(':scope > li > .main-nav-link')]
+    .findLast((a) => /\/(register|sign-?up|join|get-started)\/?$/.test(new URL(a.href).pathname));
+  ctaLink?.classList.add('main-nav-cta');
 }
 
 async function decorateActionSection(section) {

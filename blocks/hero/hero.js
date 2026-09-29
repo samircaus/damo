@@ -31,10 +31,24 @@ function decorateForeground(fg) {
   }
 }
 
+// A text-only leading row (no picture/video) is an eyebrow, not a background.
+function decorateEyebrow(row, fg) {
+  if (row.querySelector('picture, video, a[href*=".mp4"]')) return false;
+  const content = fg.querySelector(':scope > div') || fg;
+  const eyebrow = document.createElement('p');
+  eyebrow.className = 'hero-eyebrow';
+  const cell = row.querySelector(':scope > div') || row;
+  eyebrow.append(...cell.childNodes);
+  content.prepend(eyebrow);
+  row.remove();
+  return true;
+}
+
 export default async function init(el) {
   const rows = [...el.querySelectorAll(':scope > div')];
   const fg = rows.pop();
   fg.classList.add('hero-foreground');
+  if (rows.length && decorateEyebrow(rows[rows.length - 1], fg)) rows.pop();
   decorateForeground(fg);
   if (rows.length) {
     const bg = rows.pop();

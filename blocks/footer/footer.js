@@ -9,7 +9,7 @@ const FOOTER_PATH = '/fragments/nav/footer';
  */
 function decorateSocialLinks(fragment) {
   const links = fragment.querySelectorAll('a[href]');
-  
+
   const icons = {
     github: `<svg viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
       <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" 
@@ -30,9 +30,11 @@ function decorateSocialLinks(fragment) {
 
     if (href.includes('github.com')) {
       link.insertAdjacentHTML('beforeend', icons.github);
+      link.classList.add('footer-social');
     } else if (href.includes('linkedin.com')) {
       link.insertAdjacentHTML('beforeend', icons.linkedin);
-    } else {
+      link.classList.add('footer-social');
+    } else if (link.hostname !== window.location.hostname && /^https?:/.test(href)) {
       link.insertAdjacentHTML('beforeend', icons.website);
     }
   });
