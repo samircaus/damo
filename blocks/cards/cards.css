@@ -1,9 +1,9 @@
 .cards {
   --cards-gap: 24px;
   --cards-padding: 24px;
-  --cards-radius: 18px;
-  --cards-border: light-dark(rgb(37 99 235 / 12%), rgb(147 197 253 / 14%));
-  --cards-border-hover: light-dark(rgb(37 99 235 / 32%), rgb(147 197 253 / 32%));
+  --cards-radius: 6px;
+  --cards-border: light-dark(var(--color-gray-200), rgb(255 255 255 / 12%));
+  --cards-border-hover: var(--color-brand);
 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
@@ -23,33 +23,16 @@
     overflow: hidden;
     border: 1px solid var(--cards-border);
     border-radius: var(--cards-radius);
-    background-color: light-dark(rgb(255 255 255 / 94%), rgb(17 28 47 / 92%));
+    background-color: light-dark(var(--color-light), #22272c);
     color: light-dark(var(--color-dark), var(--color-light));
-    box-shadow: 0 16px 42px light-dark(rgb(37 99 235 / 8%), rgb(2 132 199 / 8%));
     transition:
       transform 0.2s ease-in-out,
-      border-color 0.2s ease-in-out,
-      box-shadow 0.2s ease-in-out;
-
-    &::before {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto;
-      height: 4px;
-      background: linear-gradient(90deg, var(--color-brand), var(--color-accent));
-      opacity: 0;
-      transition: opacity 0.2s ease-in-out;
-    }
+      border-color 0.2s ease-in-out;
 
     &:hover,
     &:focus-within {
-      transform: translateY(-3px);
+      transform: translateY(-1px);
       border-color: var(--cards-border-hover);
-      box-shadow: 0 22px 54px light-dark(rgb(37 99 235 / 14%), rgb(2 132 199 / 14%));
-
-      &::before {
-        opacity: 1;
-      }
     }
   }
 
@@ -150,7 +133,7 @@
   .cards-card-meta-group {
     display: grid;
     gap: 0;
-    border-block: 1px solid light-dark(var(--color-gray-200), rgb(147 197 253 / 14%));
+    border-block: 1px solid light-dark(var(--color-gray-200), rgb(255 255 255 / 12%));
   }
 
   .cards-card-body .cards-card-meta {
@@ -161,7 +144,7 @@
     padding: 10px 0;
 
     & + .cards-card-meta {
-      border-top: 1px dashed light-dark(var(--color-gray-200), rgb(147 197 253 / 14%));
+      border-top: 1px solid light-dark(var(--color-gray-200), rgb(255 255 255 / 12%));
     }
   }
 
@@ -180,7 +163,7 @@
   .cards-card-body p.cards-card-note {
     padding: 12px 14px;
     border-left: 3px solid var(--color-accent);
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 6px 6px 0;
     background-color: var(--color-shaded);
     font-style: italic;
   }

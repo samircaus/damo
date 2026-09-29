@@ -154,32 +154,32 @@
   --color-yellow-800: #92400e;
   --color-yellow-900: #78350f;
 
-  /* cool surface and accent aliases kept for block compatibility */
-  --color-beige-50: #f8fbff;
-  --color-beige-100: #eef6ff;
-  --color-beige-200: #dbeafe;
-  --color-beige-300: #bfdbfe;
-  --color-beige-400: #93c5fd;
-  --color-beige-500: #60a5fa;
-  --color-rust-100: #dbeafe;
-  --color-rust-200: #bfdbfe;
-  --color-rust-300: #93c5fd;
-  --color-rust-400: #60a5fa;
-  --color-rust-500: #2563eb;
-  --color-rust-600: #1d4ed8;
-  --color-rust-700: #1e40af;
-  --color-rust-800: #1e3a8a;
-  --color-terracotta-500: #0ea5e9;
-  --color-terracotta-600: #0284c7;
+  /* Compatibility aliases used by existing blocks. */
+  --color-beige-50: #f8f9fa;
+  --color-beige-100: #f0f2f4;
+  --color-beige-200: #e4e7eb;
+  --color-beige-300: #d4d9de;
+  --color-beige-400: #b7c0c9;
+  --color-beige-500: #82909b;
+  --color-rust-100: #e5eef4;
+  --color-rust-200: #c8dce9;
+  --color-rust-300: #a7c5d9;
+  --color-rust-400: #729bb8;
+  --color-rust-500: #285f87;
+  --color-rust-600: #214c6d;
+  --color-rust-700: #1b3d58;
+  --color-rust-800: #162f43;
+  --color-terracotta-500: #285f87;
+  --color-terracotta-600: #214c6d;
 
   /* named colors */
   --color-light: #fff;
-  --color-dark: #0b1220;
-  --color-text: light-dark(#102033, #e8f1ff);
-  --color-link: light-dark(var(--color-blue-700), var(--color-blue-300));
+  --color-dark: #191d21;
+  --color-text: light-dark(#292e33, #e5e7e9);
+  --color-link: light-dark(var(--color-rust-600), var(--color-rust-300));
   --color-brand: var(--color-rust-500);
-  --color-accent: light-dark(var(--color-terracotta-600), var(--color-terracotta-500));
-  --color-shaded: light-dark(var(--color-beige-100), #111c2f);
+  --color-accent: var(--color-brand);
+  --color-shaded: light-dark(var(--color-beige-100), #22272c);
 
   /* fonts */
   --font-family: montserrat, "Trebuchet MS", sans-serif;
@@ -225,13 +225,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background:
-    radial-gradient(
-      circle at 18% 0%,
-      light-dark(rgb(37 99 235 / 8%), rgb(14 165 233 / 12%)),
-      transparent 34rem
-    ),
-    light-dark(var(--color-light), var(--color-dark));
+  background-color: light-dark(var(--color-light), var(--color-dark));
   color: var(--color-text);
   font-family: var(--font-family);
   font-size: var(--body-font-size-m);
@@ -289,7 +283,7 @@ a {
     border: 2px solid;
     padding: 12px 22px;
     box-sizing: border-box;
-    border-radius: 999px;
+    border-radius: 6px;
     transition:
       transform 0.2s ease-in-out,
       box-shadow 0.2s ease-in-out,
@@ -300,7 +294,7 @@ a {
 
     &:hover {
       transform: translateY(-1px);
-      box-shadow: 0 12px 28px light-dark(rgb(37 99 235 / 18%), rgb(14 165 233 / 16%));
+      box-shadow: 0 4px 12px light-dark(rgb(25 29 33 / 10%), rgb(0 0 0 / 24%));
     }
 
     &:active {
@@ -309,7 +303,7 @@ a {
     }
 
     &:focus-visible {
-      outline: 3px solid light-dark(rgb(37 99 235 / 28%), rgb(147 197 253 / 42%));
+      outline: 3px solid light-dark(rgb(40 95 135 / 36%), rgb(167 197 217 / 52%));
       outline-offset: 3px;
     }
 
@@ -329,8 +323,8 @@ a {
 
     &:hover {
       color: #fff;
-      background: var(--color-blue-700);
-      border-color: var(--color-blue-700);
+      background: var(--color-rust-700);
+      border-color: var(--color-rust-700);
     }
 
     &.btn-outline {
@@ -631,8 +625,8 @@ h6 {
 
 h1 {
   font-size: var(--heading-font-size-xxl);
-  margin-top: 2.5em;
-  margin-bottom: 1em;
+  margin-top: 1em;
+  margin-bottom: 0.75em;
 }
 
 h2 {

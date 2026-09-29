@@ -1,23 +1,8 @@
 footer {
   position: relative;
   margin-top: var(--spacing-xl);
-  border-top: 1px solid light-dark(rgb(37 99 235 / 12%), rgb(147 197 253 / 12%));
-  background:
-    radial-gradient(
-      circle at 10% 0%,
-      light-dark(rgb(37 99 235 / 10%), rgb(14 165 233 / 12%)),
-      transparent 24rem
-    ),
-    light-dark(var(--color-shaded), var(--color-gray-900));
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: -1px 0 auto;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--color-brand), var(--color-accent), transparent);
-    opacity: 0.6;
-  }
+  border-top: 1px solid light-dark(var(--color-gray-200), rgb(255 255 255 / 12%));
+  background-color: var(--color-shaded);
 
   a {
     display: inline-flex;
@@ -64,7 +49,7 @@ footer {
 
   .section-copyright {
     padding-top: var(--spacing-l);
-    border-top: 1px solid light-dark(rgb(37 99 235 / 10%), rgb(147 197 253 / 12%));
+    border-top: 1px solid light-dark(var(--color-gray-200), rgb(255 255 255 / 12%));
 
     p {
       max-width: 72ch;

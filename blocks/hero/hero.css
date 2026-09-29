@@ -1,13 +1,7 @@
 .hero {
   position: relative;
   color: var(--color-dark);
-  background:
-    radial-gradient(
-      circle at 82% 16%,
-      light-dark(rgb(14 165 233 / 18%), rgb(14 165 233 / 16%)),
-      transparent 32rem
-    ),
-    linear-gradient(135deg, light-dark(#f8fbff, #0b1220) 0%, light-dark(#eef6ff, #111c2f) 100%);
+  background-color: light-dark(#f3f5f6, #20252a);
   overflow: hidden;
 
   --min-height: 420px;
@@ -38,40 +32,25 @@
 
   &.light {
     color: var(--color-dark);
-    background:
-      radial-gradient(circle at 82% 16%, rgb(14 165 233 / 18%), transparent 32rem),
-      linear-gradient(135deg, #f8fbff 0%, #eef6ff 100%);
+    background-color: #f3f5f6;
   }
 
   &.dark {
     color: var(--color-light);
-    background:
-      radial-gradient(circle at 82% 16%, rgb(14 165 233 / 16%), transparent 32rem),
-      var(--color-dark);
+    background-color: var(--color-dark);
   }
 
   &::before {
     content: "";
     position: absolute;
     inset: 0;
-
-    --hero-grid-line: light-dark(rgb(37 99 235 / 6%), rgb(147 197 253 / 6%));
-
-    background:
-      linear-gradient(var(--hero-grid-line) 1px, transparent 1px) 0 0 / 48px 48px,
-      linear-gradient(90deg, var(--hero-grid-line) 1px, transparent 1px) 0 0 / 48px 48px,
-      linear-gradient(
-        135deg,
-        rgb(37 99 235 / 8%) 0%,
-        rgb(14 165 233 / 10%) 100%
-      );
-    mask-image: radial-gradient(ellipse at 50% 40%, #000 30%, transparent 80%);
+    background-color: light-dark(rgb(255 255 255 / 12%), rgb(25 29 33 / 18%));
     pointer-events: none;
     z-index: 1;
   }
 
   &.dark::before {
-    background: linear-gradient(135deg, rgb(37 99 235 / 18%) 0%, rgb(14 165 233 / 16%) 100%);
+    background-color: rgb(25 29 33 / 24%);
   }
 
   .hero-background {
@@ -131,16 +110,16 @@
       text-transform: uppercase;
       letter-spacing: 1.5px;
       font-weight: 600;
-      color: var(--color-blue-700);
+      color: var(--color-brand);
       opacity: 0.95;
     }
 
     .hero-heading {
       margin: 20px 0;
       font-size: var(--heading-font-size-xxl);
-      font-weight: 750;
+      font-weight: 700;
       line-height: 1.08;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.035em;
       color: light-dark(var(--color-gray-900), var(--color-gray-100));
       text-wrap: balance;
 
@@ -152,20 +131,20 @@
     .hero-eyebrow {
       display: inline-flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       gap: 4px 8px;
       margin: 0;
-      padding: 6px 16px;
-      border: 1px solid light-dark(rgb(37 99 235 / 18%), rgb(147 197 253 / 22%));
-      border-radius: 999px;
-      background-color: light-dark(rgb(255 255 255 / 70%), rgb(17 28 47 / 60%));
-      backdrop-filter: blur(8px);
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background-color: transparent;
+      backdrop-filter: none;
       font-size: var(--body-font-size-xs);
       font-weight: 500;
       letter-spacing: 0.02em;
       text-transform: none;
-      color: light-dark(var(--color-gray-700), var(--color-gray-300));
+      color: light-dark(var(--color-gray-600), var(--color-gray-300));
 
       strong {
         letter-spacing: 0.12em;
@@ -186,9 +165,9 @@
 
     .btn-secondary {
       color: light-dark(var(--color-gray-900), var(--color-gray-100));
-      background-color: light-dark(rgb(255 255 255 / 72%), rgb(17 28 47 / 60%));
-      border-color: light-dark(rgb(37 99 235 / 22%), rgb(147 197 253 / 28%));
-      backdrop-filter: blur(8px);
+      background-color: light-dark(rgb(255 255 255 / 92%), rgb(25 29 33 / 72%));
+      border-color: light-dark(var(--color-gray-300), rgb(255 255 255 / 24%));
+      backdrop-filter: none;
 
       &:hover {
         color: var(--color-brand);

@@ -2,15 +2,13 @@
   --spacing-default: 24px;
 
   overflow: hidden;
-  background-color: light-dark(rgb(255 255 255 / 92%), rgb(17 28 47 / 92%));
+  background-color: light-dark(var(--color-light), #22272c);
   color: light-dark(var(--color-dark), var(--color-light));
   transition:
     transform 0.2s ease-in-out,
-    border-color 0.2s ease-in-out,
-    box-shadow 0.2s ease-in-out;
-  border-radius: 18px;
-  border: 1px solid light-dark(rgb(37 99 235 / 12%), rgb(147 197 253 / 14%));
-  box-shadow: 0 16px 42px light-dark(rgb(37 99 235 / 8%), rgb(2 132 199 / 8%));
+    border-color 0.2s ease-in-out;
+  border-radius: 6px;
+  border: 1px solid light-dark(var(--color-gray-200), rgb(255 255 255 / 12%));
 
   .card-link {
     display: block;
@@ -70,9 +68,8 @@
   }
 
   &:not(.quiet):hover {
-    transform: translateY(-2px);
-    border-color: light-dark(rgb(37 99 235 / 28%), rgb(147 197 253 / 28%));
-    box-shadow: 0 20px 54px light-dark(rgb(37 99 235 / 12%), rgb(2 132 199 / 12%));
+    transform: translateY(-1px);
+    border-color: var(--color-brand);
 
     picture {
       opacity: 1;
