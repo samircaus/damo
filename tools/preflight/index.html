@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Page Preflight | Damo</title>
+    <link rel="stylesheet" href="/tools/preflight/preflight.css" />
+    <script type="module" src="/tools/preflight/preflight.js"></script>
+  </head>
+  <body>
+    <main class="preflight">
+      <header class="preflight-header">
+        <a class="back-link" href="/">Damo</a>
+        <p class="eyebrow">Demo tool</p>
+        <h1>Page Preflight</h1>
+        <p class="intro">A quick content and SEO check for a page on this site.</p>
+      </header>
+
+      <form id="preflight-form" class="url-form">
+        <label for="page-url">Page path or URL</label>
+        <div class="url-controls">
+          <input id="page-url" name="page-url" type="text" value="/" required />
+          <button type="submit">Run checks</button>
+        </div>
+        <p class="field-hint">For safety, only pages on this site can be checked.</p>
+      </form>
+
+      <p id="preflight-status" class="status" role="status" aria-live="polite">
+        Enter a page path and run the checks.
+      </p>
+      <section id="preflight-results" aria-label="Preflight results" hidden></section>
+      <footer class="preflight-footer">
+        Checks run in your browser. This tool does not edit or publish pages.
+      </footer>
+    </main>
+  </body>
+</html>

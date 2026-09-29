@@ -99,6 +99,7 @@ This project features:
 
 - Extensible plumbing for plugins
 - Schedule simulator
+- Page Preflight demo for content, SEO, accessibility, and same-site link checks
 
 ### Performance
 
@@ -116,6 +117,13 @@ This project features:
 ### Operations
 
 - Cloudflare Worker reference implementation
+
+## Demo tools
+
+Open `/tools/preflight/` on the preview or live site to run the read-only Page
+Preflight checks against a page on the same host. It checks heading structure,
+placeholder text, page metadata, image alt attributes, and a sample of same-site
+links. External links are not fetched, and the tool never edits or publishes content.
 
 ## Design System Dimensions
 

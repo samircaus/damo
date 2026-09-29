@@ -60,7 +60,16 @@ function getReplaceEl(a) {
 
 export default async function init(a) {
   const path = a.getAttribute('href');
-  const fragment = await loadFragment(path);
+  let fragment;
+  try {
+    fragment = await loadFragment(path);
+  } catch (e) {
+    // Fragment not authored yet: remove the reference instead of breaking the page.
+    // eslint-disable-next-line no-console
+    console.warn(`Fragment not found at ${path}, removing reference.`, e);
+    getReplaceEl(a).remove();
+    return;
+  }
   if (fragment) {
     const elToReplace = getReplaceEl(a);
     const sections = fragment.querySelectorAll(':scope > .section');

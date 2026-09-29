@@ -62,6 +62,10 @@ export default async function init(el) {
 
     el.append(fragment);
   } catch (e) {
-    throw Error(e);
+    // No footer fragment authored yet: hide the footer instead of breaking the page.
+    // eslint-disable-next-line no-console
+    console.warn(`Footer fragment not found at ${path}, hiding footer.`, e);
+    el.remove();
+    document.body.classList.add('no-footer');
   }
 }

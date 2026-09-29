@@ -260,6 +260,10 @@ export default async function init(el) {
     await decorateHeader(fragment);
     el.append(fragment);
   } catch (e) {
-    throw Error(e);
+    // No header fragment authored yet: hide the header instead of breaking the page.
+    // eslint-disable-next-line no-console
+    console.warn(`Header fragment not found at ${path}, hiding header.`, e);
+    el.remove();
+    document.body.classList.add('no-header');
   }
 }
